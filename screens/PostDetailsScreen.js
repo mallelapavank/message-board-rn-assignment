@@ -6,7 +6,6 @@ import capitalizeFirstLetter from "../util/capitalizeFirstLetter";
 export default function PostDetailsScreen(props) {
   const [comments, setComments] = React.useState([]);
   const post = props.route.params?.post ?? null;
-  console.log("props", props);
 
   React.useEffect(() => {
     fetchPostComments(post.id).then((data) => setComments(data));
