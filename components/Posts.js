@@ -1,35 +1,41 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { Text, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { colors } from "../constants";
 import capitalizeFirstLetter from "../util/capitalizeFirstLetter";
 import Card from "./Card";
 
 export default function Posts({ posts, users }) {
+  const navigation = useNavigation();
+  const gotoPostDetails = (post) => navigation.navigate("Post", { post });
+
   const renderItem = ({ item }) => {
-    const name = users[item.userId] ? users[item.userId].name : "No Name";
+    const user = users.find((user) => user.id === item.userId);
+    const name = user ? user.name : "No Name";
     const title = item.title ? capitalizeFirstLetter(item.title) : "No Title";
     return (
-      <Card>
-        <Text ellipsizeMode="tail" numberOfLines={1} style={styles.name}>
-          {`${item.id}. ${name}`}
-        </Text>
-        <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
-          {title}
-        </Text>
-      </Card>
+      <TouchableOpacity onPress={() => gotoPostDetails(item)}>
+        <Card>
+          <Text ellipsizeMode="tail" numberOfLines={1} style={styles.name}>
+            {`${item.id}. ${name}`}
+          </Text>
+          <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
+            {title}
+          </Text>
+        </Card>
+      </TouchableOpacity>
     );
   };
 
   if (!posts || !posts.length) return null;
   return (
-    <View>
-      <FlatList
-        contentContainerStyle={{ paddingBottom: 32 }}
-        data={posts}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+    <FlatList
+      contentContainerStyle={{ paddingBottom: 32 }}
+      data={posts}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+    />
   );
 }
 

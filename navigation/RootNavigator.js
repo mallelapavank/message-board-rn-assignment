@@ -1,7 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import PostsScreen from "../screens/PostsScreen";
+import PostListScreen from "../screens/PostListScreen";
+import PostDetailsScreen from "../screens/PostDetailsScreen";
 import { colors } from "../constants";
 
 const Stack = createStackNavigator();
@@ -13,12 +14,12 @@ export default function RootNavigator() {
         headerShown: true,
         headerStyle: { backgroundColor: colors.primaryColor },
         headerTitleStyle: {
-          // alignSelf: "center",
           color: "#FFFFFF",
         },
       }}
     >
-      <Stack.Screen name="Message Board" component={PostsScreen} />
+      <Stack.Screen name="Message Board" component={PostListScreen} />
+      <Stack.Screen name="Post" component={PostDetailsScreen} />
     </Stack.Navigator>
   );
 }
