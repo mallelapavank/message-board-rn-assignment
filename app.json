@@ -1,0 +1,12 @@
+{
+  "name": "message-board-rn-assignnment",
+  "displayName": "message-board-rn-assignnment",
+  "expo": {
+    "name": "message-board-rn-assignnment",
+    "slug": "message-board-rn-assignnment",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
